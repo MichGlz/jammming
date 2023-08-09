@@ -12,58 +12,106 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --app-padding: 1rem;
+  --bg-color: #242424; 
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+*{
   margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+  /* outline: solid 1px #ff359a84; */
+}
+
+.app-wraper{
+  padding: var(--app-padding);
+}
+
+.header{
+  text-align: center;
+  min-height: calc(20vh - var(--app-padding));
+  
+}
+
+.main-section{
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(80vh - var(--app-padding));
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.lists-wraper{
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;  
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.list{
+  display: flex;
+  flex-direction: column;
+  min-width: 275px;
+  gap: .25rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.track{
+  background-color: #3f3f3f;
+  
+  position: relative;
+  border-radius: .25rem;
+  /* display: grid;
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: 1fr; */
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
 }
+
+.playlist{
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.info{
+  padding: .5rem;
+  padding-left: .75rem;
+}
+
+.info p{
+  display: inline-block;
+  width: f;
+}
+
+.info p + p{
+  margin-left: 1rem;
+}
+
+.album{
+  font-size: 80%;
+  font-style: italic;
+  letter-spacing: .15rem;
+}
+
+.add-track{
+  padding: .5rem;
+  display: grid;
+  align-content: center;
+  outline: none;
+  border: none;
+  background-color:transparent;
+  cursor: pointer; 
+  transition: background-color .3s, font-size .3s; 
+}
+
+.add-track:hover{
+  background-color: #25252569;
+  font-size: 100%;  
+}
+
+
+
+
