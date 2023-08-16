@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
+index.js
 .env
