@@ -5,8 +5,7 @@ import Tracklist from "./Tracklist"
 import ToastPlaylistSaved from "./ToastPlaylistSaved";
 import { getToken, CLIENT_ID } from "../index"
 
-function App() {
-  
+function App() {  
   const [token, setToken]=useState('');
   const [userToken, setUserToken]=useState('');
   const [searchInput, setSearchInput]=useState('');
@@ -21,13 +20,13 @@ function App() {
     
   useEffect(()=>{    
     const urlParams = new URLSearchParams(window.location.search)
-    history.pushState({}, null, window.location.href.split('?')[0])
+    
     if(urlParams.get('code')){
       const code = urlParams.get('code')
       const state = urlParams.get('state')
       const codeVerifier = localStorage.getItem('code_verifier')
       const redirectUri = 'http://localhost:5173/jammming'
-     
+      history.pushState({}, null, window.location.href.split('?')[0])
 
       let body = new URLSearchParams({
         grant_type: 'authorization_code',
@@ -62,7 +61,7 @@ function App() {
       
   useEffect(()=>{
 
-    function getProfile() {    
+    const  getProfile = ()=>{    
       fetch('https://api.spotify.com/v1/me', {
         headers: {
           Authorization: 'Bearer ' + userToken
@@ -98,12 +97,12 @@ function App() {
    },[])
 
   const search = async () =>{
-    console.log(token)
+    console.log(userToken)
     const params = {
       method: 'GET',
       headers:{
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${userToken}`
       }
     }
 
