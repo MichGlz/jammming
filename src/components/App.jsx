@@ -3,10 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Playlist from "./Playlist"
 import Tracklist from "./Tracklist"
 import ToastPlaylistSaved from "./ToastPlaylistSaved";
-import { getToken, CLIENT_ID } from "../index"
 
-function App() {  
-  const [token, setToken]=useState('');
+const App = ()=>{  
   const [userToken, setUserToken]=useState('');
   const [searchInput, setSearchInput]=useState('');
   const [tracklist,setTracklist]=useState([]);
@@ -32,7 +30,7 @@ function App() {
         grant_type: 'authorization_code',
         code: code,
         redirect_uri: redirectUri,
-        client_id: CLIENT_ID,
+        client_id: import.meta.env.VITE_CLIENT_ID,
         code_verifier: codeVerifier,        
       });
 
@@ -60,7 +58,6 @@ function App() {
   },[])
       
   useEffect(()=>{
-
     const  getProfile = ()=>{    
       fetch('https://api.spotify.com/v1/me', {
         headers: {
@@ -83,18 +80,6 @@ function App() {
     userToken && getProfile()
 
   },[userToken])     
-  
-
-  useEffect(()=>{
-    getToken(setToken)
-    const id2 = setInterval(() => {
-      getToken(setToken);
-    }, 3590000);
-
-    return () => {
-      clearInterval(id2);
-    };
-   },[])
 
   const search = async () =>{
     console.log(userToken)
@@ -122,18 +107,7 @@ function App() {
       console.log(cleanTracks)
       setTracklist(cleanTracks)
     })
-  } 
-
-  const loginSpotify = ()=>{
-    
-    let url = 'https://accounts.spotify.com/authorize';
-    url += '?response_type=token';
-    url += '&client_id=' + encodeURIComponent(CLIENT_ID);  
-    url += '&scope=' + encodeURIComponent('user-read-private');  
-    url += '&redirect_uri=' + encodeURIComponent('http://localhost:5173/jammming');
-    
-    window.location= url
-  }
+  }   
   
   const savePlaylist = ()=>{
     const params = {
@@ -204,10 +178,9 @@ function App() {
     }
     return text;
   }
-
   
-  async function generateCodeChallenge(codeVerifier) {
-    function base64encode(string) {
+  const generateCodeChallenge = async(codeVerifier)=> {
+    const base64encode = (string)=>{
       return btoa(String.fromCharCode.apply(null, new Uint8Array(string)))
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
@@ -222,7 +195,7 @@ function App() {
   }
   
   const saveLoging = ()=>{
-    const clientId = CLIENT_ID;
+    const clientId = import.meta.env.VITE_CLIENT_ID;
     const redirectUri = 'http://localhost:5173/jammming';
 
     let codeVerifier = generateRandomString(128);
@@ -253,7 +226,7 @@ function App() {
       <header className="header">
         <h1>Jammmmming! <span>&#129304;</span></h1>
         {userName && <h2>Welcome {userName}!</h2>}
-        {isPlaylistSaved&&<ToastPlaylistSaved
+        {isPlaylistSaved && <ToastPlaylistSaved
           userName={userName}
           playlistName={playlistName}
           noTracks={playlist.length}

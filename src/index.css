@@ -206,6 +206,17 @@ input[type='button']:disabled{
   font-size: 90%;  
 }
 
+input[name="save-list"]{
+  border:solid 1px #fff;
+  border-radius: .2rem;
+  background-color: #1b44be70;
+  transition: background-color .3s;
+}
+input[name="save-list"]:hover{
+  
+  background-color: #1b44bec7;
+}
+
 .edit{
   width: 1.25rem;
   display: grid;
@@ -221,15 +232,18 @@ input[type='button']:disabled{
   position: absolute;
   left: 0;
   top: 110%;
+  z-index: 2;
   opacity: 0;
   animation: appear .2s linear 1 forwards;
 }
+
 .emoji-picker-wrapper .form-input{
   position: absolute;
   right: -1rem;
   top: -1rem;
   z-index: 2;  
 }
+
 .close-icon{
   display: block;
   background-color: #ff0000;
